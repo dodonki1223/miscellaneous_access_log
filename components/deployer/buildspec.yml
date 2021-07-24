@@ -7,4 +7,4 @@ env:
 phases:
   build:
     commands:
-      - ${CODEBUILD_SRC_DIR}/scripts/build.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/build.sh
