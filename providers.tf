@@ -6,6 +6,13 @@ terraform {
       version = "3.51.0"
     }
   }
+  backend "s3" {
+    region  = "ap-northeast-1"
+    encrypt = true
+    bucket  = "miscellaneous-access-log"
+    key     = "deploy/terraform.tfstate"
+    profile = "terraform"
+  }
 }
 
 provider "aws" {
