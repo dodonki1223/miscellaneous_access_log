@@ -1,4 +1,5 @@
 #!/bin/sh
+
 set -x
 
 # git の commit ログから変更のあった component の一覧を取得する
