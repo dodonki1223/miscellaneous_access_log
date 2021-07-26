@@ -29,6 +29,10 @@ resource "aws_codebuild_project" "continuous_apply" {
     type            = "GITHUB"
     location        = "https://github.com/dodonki1223/miscellaneous_access_log.git"
     git_clone_depth = 1
+    # buildspec.yml のディレクトリ変更方法
+    #   https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html#cfn-codebuild-project-source-buildspec
+    #   https://stackoverflow.com/questions/45723187/how-can-i-have-multiple-codebuild-buildspec-files-in-different-directories
+    buildspec       = "./components/deployer/buildspec.yml"
   }
 
   provisioner "local-exec" {
