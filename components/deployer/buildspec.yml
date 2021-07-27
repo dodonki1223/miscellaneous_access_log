@@ -3,10 +3,23 @@ version: 0.2
 env:
   parameter-store:
     GITHUB_TOKEN: "/continuous_apply/github_token"
+    DOCKERHUB_USER: "/docker_hub/user"
+    DOCKERHUB_PASS: "/docker_hub/password"
 
 phases:
+  pre_build:
+    commands:
+      - apk add docker
+      - docker -v
+      # - apk add openrc --no-cache
+      # - service docker start
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+
   build:
     commands:
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/install.sh
       - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/format.sh
       - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/validate.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/linter.sh
       - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/build.sh
