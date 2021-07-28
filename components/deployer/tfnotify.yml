@@ -1,0 +1,15 @@
+ci: codebuild
+notifier:
+  github:
+    token: $GITHUB_TOKEN
+    repository:
+      owner: "dodonki1223"
+      name: "miscellaneous_access"
+terraform:
+  plan:
+    template: |
+      {{ .Title }}
+      {{ .Message }}
+      {{if .Result}}<pre><code> {{ .Result }} </pre></code>{{end}}
+      <details><summary>Details (Click me)</summary>
+      <pre><code> {{ .Body }} </pre></code></details>
