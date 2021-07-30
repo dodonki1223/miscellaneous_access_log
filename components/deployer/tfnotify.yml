@@ -4,11 +4,11 @@ notifier:
     token: $GITHUB_TOKEN
     repository:
       owner: "dodonki1223"
-      name: "miscellaneous_access"
+      name: "miscellaneous_access_log"
 terraform:
   plan:
     template: |
-      {{ .Title }}
+      {{ .Title }} <sup>[CI link]( {{ .Link }} )</sup>
       {{ .Message }}
       {{if .Result}}<pre><code> {{ .Result }} </pre></code>{{end}}
       <details><summary>Details (Click me)</summary>
