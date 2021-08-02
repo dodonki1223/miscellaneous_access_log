@@ -18,8 +18,8 @@ phases:
 
   build:
     commands:
-      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/install.sh
-      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/format.sh
-      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/validate.sh
-      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/ci/linter.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/install.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/format.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/validate.sh
+      - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/linter.sh
       - ${CODEBUILD_SRC_DIR}/components/deployer/scripts/build.sh

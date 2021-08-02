@@ -7,6 +7,7 @@ cd ${CODEBUILD_SRC_DIR}/$1
 COMPONENT=`echo $1 | cut -d '/' -f 3`
 
 # デプロイ計画の実行
+echo ----- Run terraform plan：${COMPONENT} -----
 terraform init -input=false -no-color
 terraform plan -input=false -no-color | \
 tfnotify --config ${CODEBUILD_SRC_DIR}/components/deployer/tfnotify.yml plan --message "${COMPONENT} - $(date)"
