@@ -10,8 +10,8 @@ data "aws_iam_policy" "administrator_access" {
 }
 
 resource "aws_codebuild_project" "continuous_apply" {
-  name         = "continuous-apply"
-  service_role = module.continuous_apply_codebuild_role.iam_role_arn
+  name          = "continuous-apply"
+  service_role  = module.continuous_apply_codebuild_role.iam_role_arn
   build_timeout = "5"
 
   artifacts {
@@ -32,7 +32,7 @@ resource "aws_codebuild_project" "continuous_apply" {
     # buildspec.yml のディレクトリ変更方法
     #   https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html#cfn-codebuild-project-source-buildspec
     #   https://stackoverflow.com/questions/45723187/how-can-i-have-multiple-codebuild-buildspec-files-in-different-directories
-    buildspec       = "./components/deployer/buildspec.yml"
+    buildspec = "./components/cicd/buildspec.yml"
   }
 
   provisioner "local-exec" {

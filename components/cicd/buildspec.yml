@@ -1,0 +1,14 @@
+version: 0.2
+
+env:
+  parameter-store:
+    GITHUB_TOKEN: "/continuous_apply/github_token"
+
+phases:
+  build:
+    commands:
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/install.sh
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/format.sh
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/validate.sh
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/linter.sh
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/build.sh
