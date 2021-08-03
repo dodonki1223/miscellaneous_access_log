@@ -10,7 +10,7 @@ terraform {
     region  = "ap-northeast-1"
     encrypt = true
     bucket  = "miscellaneous-access-log"
-    key     = "deployer/terraform.tfstate"
+    key     = "cicd/terraform.tfstate"
     profile = "terraform"
   }
 }
