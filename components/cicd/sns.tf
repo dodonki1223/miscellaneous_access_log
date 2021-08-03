@@ -28,14 +28,14 @@ resource "aws_sns_topic_policy" "default" {
 
 # Codeシリーズのデベロッパー用ツールの通知ルールが作成される
 resource "aws_codestarnotifications_notification_rule" "build" {
-  detail_type    = "BASIC"
+  detail_type = "BASIC"
   # CodeBuildのイベントについてははこちらのドキュメントを確認すること
   #   https://docs.aws.amazon.com/ja_jp/dtconsole/latest/userguide/concepts.html#events-ref-buildproject
+  #   NOTE: phase の通知をするとすべてのイベントの通知を行うのですごく邪魔なので state だけ通知の対象とする
   event_type_ids = [
     "codebuild-project-build-state-failed",
-    "codebuild-project-build-phase-failure",
-    "codebuild-project-build-phase-success",
-    ]
+    "codebuild-project-build-state-succeeded",
+  ]
 
   name     = "codebuild-notify-for-project"
   resource = aws_codebuild_project.continuous_apply.arn
