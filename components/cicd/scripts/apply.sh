@@ -10,4 +10,4 @@ COMPONENT=`echo $1 | cut -d '/' -f 3`
 echo ----- Run terraform apply：${COMPONENT} -----
 terraform init -input=false -no-color
 terraform apply -input=false -no-color -auto-approve | \
-tfnotify --config ${CODEBUILD_SRC_DIR}/components/cicd/tfnotify.yml plan --message "${COMPONENT} - $(date)"
+tfnotify --config ${CODEBUILD_SRC_DIR}/components/cicd/tfnotify.yml apply --message "${COMPONENT} - $(date)"
