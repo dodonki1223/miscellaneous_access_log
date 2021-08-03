@@ -25,3 +25,22 @@ resource "aws_sns_topic_policy" "default" {
   arn    = aws_sns_topic.codeseries_notif.arn
   policy = data.aws_iam_policy_document.notif_access.json
 }
+
+# Codeシリーズのデベロッパー用ツールの通知ルールが作成される
+resource "aws_codestarnotifications_notification_rule" "build" {
+  detail_type    = "BASIC"
+  # CodeBuildのイベントについてははこちらのドキュメントを確認すること
+  #   https://docs.aws.amazon.com/ja_jp/dtconsole/latest/userguide/concepts.html#events-ref-buildproject
+  event_type_ids = [
+    "codebuild-project-build-state-failed",
+    "codebuild-project-build-phase-failure",
+    "codebuild-project-build-phase-success",
+    ]
+
+  name     = "codebuild-notify-for-project"
+  resource = aws_codebuild_project.continuous_apply.arn
+
+  target {
+    address = aws_sns_topic.codeseries_notif.arn
+  }
+}
