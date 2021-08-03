@@ -11,3 +11,4 @@ phases:
       - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/format.sh
       - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/validate.sh
       - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/linter.sh
+      - ${CODEBUILD_SRC_DIR}/components/cicd/scripts/build.sh
