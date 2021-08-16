@@ -20,3 +20,22 @@ resource "aws_subnet" "public_subnet" {
     })
   )
 }
+
+/*
+    プライベートサブネット
+      variable の private_subnet_cidrs の値を使用して複数のプライベートサブネットを作成する
+ */
+resource "aws_subnet" "private_subnet" {
+  count             = length(var.private_subnet_cidrs)
+  vpc_id            = aws_vpc.miscellaneous_access_vpc.id
+  cidr_block        = element(var.private_subnet_cidrs, count.index)
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+
+  tags = merge(
+    local.common-tags,
+    tomap({
+      "Name"        = "${var.application}-private-subnet - ${count.index + 1}",
+      "Description" = "Private subnet - ${count.index + 1}"
+    })
+  )
+}

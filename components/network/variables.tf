@@ -39,3 +39,12 @@ variable "public_subnet_cidrs" {
     "10.0.2.0/24"
   ]
 }
+
+variable "private_subnet_cidrs" {
+  description = "Private subnet - CIDR"
+  type        = list(string)
+  default = [
+    "10.0.65.0/24",
+    "10.0.66.0/24"
+  ]
+}
