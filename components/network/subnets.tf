@@ -4,12 +4,16 @@ data "aws_availability_zones" "available" {}
 /*
     パブリックサブネット
       variable の public_subnet_cidrs の値を使用して複数のパブリックサブネットを作成する
+      そもそもパブリックサブネットとは？
+        サブネットのトラフィックがインターネットゲートウェイにルーティングされる場合、
+        そのサブネットはパブリックサブネットと呼ばれます
  */
 resource "aws_subnet" "public_subnet" {
   count      = length(var.public_subnet_cidrs)
   vpc_id     = aws_vpc.miscellaneous_access_vpc.id
   cidr_block = element(var.public_subnet_cidrs, count.index)
   // 東京リージョンの場合は３つまで指定できる、４つだとエラーで落ちる
+  // サブネットは必ずどこかの AZ に作られ、複数の AZ にまたがったサブネットを作成することはできません
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = merge(
@@ -24,6 +28,8 @@ resource "aws_subnet" "public_subnet" {
 /*
     プライベートサブネット
       variable の private_subnet_cidrs の値を使用して複数のプライベートサブネットを作成する
+      そもそもプライベートサブネットとは？
+        インターネットゲートウェイへのルートがないサブネットは、プライベートサブネットと呼ばれます
  */
 resource "aws_subnet" "private_subnet" {
   count             = length(var.private_subnet_cidrs)
