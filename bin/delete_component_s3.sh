@@ -12,8 +12,13 @@ read -p "削除対象のComponentのtfstateファイルが存在するバケッ�
 
 # 対象のComponentのtfstateファイルを管理しているディレクトリを削除する
 DELETE_S3_PATH="s3://${BUCKET_NAME}/${COMPONENT_NAME}"
-printf "\n${COMPONENT_NAME}を削除します……(${DELETE_S3_PATH})\n"
+DELETE_DIR_PATH="./../components/${COMPONENT_NAME}"
+printf "\n「${COMPONENT_NAME}」Componentsを削除します\n"
+printf "\n S3: ${DELETE_S3_PATH}\nDir: ${DELETE_DIR_PATH}\n\n"
 read -p "削除を実行する場合はenterを押して下さい: "
 aws s3 rm ${DELETE_S3_PATH} \
   --recursive \
   --profile ${PROFILE_NAME} \
+
+# 対象のComponentフォルダを削除
+rm -rf ${DELETE_DIR_PATH}
