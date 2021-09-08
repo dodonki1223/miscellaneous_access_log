@@ -6,11 +6,15 @@ terraform {
       version = "3.51.0"
     }
   }
+  /*
+      ここでは variables が使えないためおとなしくハードコーディングする
+        詳しくはこちらを：https://qiita.com/ymmy02/items/e7368abd8e3dafbc5c52
+   */
   backend "s3" {
     region  = "ap-northeast-1"
     encrypt = true
     bucket  = "miscellaneous-access-log"
-    key     = "cicd/terraform.tfstate"
+    key     = "network/terraform.tfstate"
     profile = "terraform"
   }
 }
