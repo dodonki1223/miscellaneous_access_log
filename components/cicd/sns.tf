@@ -1,7 +1,10 @@
 # 詳しくは公式の Example を参考にすること
 #   https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codestarnotifications_notification_rule#example-usage
 
-# SNSトピックの作成
+/*
+    SNSトピック
+      SNSトピックを作成し、作成したSNSトピックにアクセスポリシーを設定する
+ */
 resource "aws_sns_topic" "codeseries_notif" {
   name = "codeseries-notifications-for-cicd"
 }
@@ -26,7 +29,14 @@ resource "aws_sns_topic_policy" "default" {
   policy = data.aws_iam_policy_document.notif_access.json
 }
 
-# Codeシリーズのデベロッパー用ツールの通知ルールが作成される
+/*
+    Codeシリーズの通知設定
+      Codeシリーズからの通知をAmazon SNSに紐付け、アプリケーション対アプリケーション（A2A)間
+      の通信を可能とする
+      Codeシリーズのデベロッパー用ツールの通知ルールが作成される
+      コンソール画面でSNSをAWS Chatbotに紐付けることでSlack通知を可能とする（AWS Chatbotはterraformに
+      まだ対応していないため）
+ */
 resource "aws_codestarnotifications_notification_rule" "build" {
   detail_type = "BASIC"
   # CodeBuildのイベントについてははこちらのドキュメントを確認すること

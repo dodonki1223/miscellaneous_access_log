@@ -1,5 +1,4 @@
 # Standard Variables
-
 variable "aws_region" {
   description = "Target AWS Region"
   type        = string
