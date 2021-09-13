@@ -7,6 +7,7 @@ terraform {
     }
   }
   /*
+      tfstateファイルの保存場所をS3に設定する
       ここでは variables が使えないためおとなしくハードコーディングする
         詳しくはこちらを：https://qiita.com/ymmy02/items/e7368abd8e3dafbc5c52
    */

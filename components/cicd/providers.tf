@@ -6,6 +6,9 @@ terraform {
       version = "3.51.0"
     }
   }
+  /*
+      tfstateファイルの保存場所をS3に設定する
+   */
   backend "s3" {
     region  = "ap-northeast-1"
     encrypt = true
