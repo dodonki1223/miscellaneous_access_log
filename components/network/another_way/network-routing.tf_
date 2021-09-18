@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "miscellaneous_access_igw" {
       ネットワークアドレス変換サービス。NAT Gatewayを使用すると、プライベートサブネット内の
       インスタンスはVPC外のサービスに接続できるが外部サービスはそれらのインスタンスとの接続を開始できない
       NAT GatewayにEIPをバインドする（NAT Gatewayによるアクセス元IPアドレスの固定するため）
-        詳しくはこちら：https://dev.classmethod.jp/articles/fix-sender-ip-address-with-nat-gateway/
+        https://dev.classmethod.jp/articles/fix-sender-ip-address-with-nat-gateway/
       NAT Gateway は基本的にはパブリックサブネットに作成する
         プライベートサブネット→パブリックサブネット→NAT Gateway の順番
  */

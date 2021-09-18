@@ -65,10 +65,10 @@ resource "aws_codebuild_project" "continuous_apply" {
   /*
       local-exec
         リソースが作成された後にローカルで実行される
-          詳しくはこちらを：https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
+          https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
         GitHubをアクセストークンで接続するためにこの設定が必要？
           ローカルに$GITHUB_TOKENとprofileの設定を予め行っておく必要がある
-          詳しくはこちらを：https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/access-tokens.html#access-tokens-github-cli
+          https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/access-tokens.html#access-tokens-github-cli
    */
   provisioner "local-exec" {
     command = <<-EOT
