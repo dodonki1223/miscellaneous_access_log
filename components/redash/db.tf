@@ -26,3 +26,16 @@ resource "aws_db_subnet_group" "miscellaneous_access_rds_sbg" {
   name       = replace("${var.application}-rds-sbg", "_", "-")
   subnet_ids = data.terraform_remote_state.vpc.outputs.private_subnets
 }
+
+/*
+    セキュリティグループ
+      PostgreSQL のポート番号をVPC内で許可する
+ */
+module "postgres_sg" {
+  source      = "../../modules/security_group"
+  name        = "${var.application}-postgres-sg"
+  description = "Allow port number for PostgreSQL"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+  port        = var.rds_port_number
+  cidr_blocks = [data.terraform_remote_state.vpc.outputs.vpc_cidr_block]
+}

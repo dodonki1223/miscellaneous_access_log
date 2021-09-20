@@ -29,3 +29,9 @@ variable "rds_version" {
   type        = string
   default     = "9.6"
 }
+
+variable "rds_port_number" {
+  description = "PostgreSQL port number"
+  type        = number
+  default     = 5436
+}
