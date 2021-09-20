@@ -16,3 +16,13 @@ resource "aws_db_parameter_group" "miscellaneous_access_rds_pg" {
     value = "UTC+9"
   }
 }
+
+/*
+    DBサブネットグループ
+      DBを稼働させるサブネットをDBサブネットグループで定義する
+      サブネットには異なるアベイラビリティゾーンのものを含む
+ */
+resource "aws_db_subnet_group" "miscellaneous_access_rds_sbg" {
+  name       = replace("${var.application}-rds-sbg", "_", "-")
+  subnet_ids = data.terraform_remote_state.vpc.outputs.private_subnets
+}
